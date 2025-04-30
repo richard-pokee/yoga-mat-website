@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang=\"en\">
+<head>
+    <meta charset=\"UTF-8\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+    <title>Lucky Number 7</title>
+    <style>
+        :root {
+            --primary-color: #6200ea;
+            --secondary-color: #03dac6;
+            --background-color: #f5f5f5;
+            --text-color: #333;
+            --card-bg: #fff;
+            --accent-color: #ff4081;
+            --success-color: #00c853;
+            --warning-color: #ffab00;
+            --danger-color: #ff1744;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #9c27b0);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 15rem;
+            font-weight: bold;
+        }
+
+        nav {
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+        }
+
+        .section {
+            margin: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: -10px;
+            left: 20%;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-image {
+            height: 200px;
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .card-text {
+            margin-bottom: 1.5rem;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .stat-title {
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+
+        .chart-container {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin: 2rem 0;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .chart-controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chart {
+            width: 100%;
+            height: 400px;
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        .chart-bars {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            height: 300px;
+        }
+
+        .chart-bar {
+            width: 40px;
+            background-color: var(--primary-color);
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .chart-bar:hover {
+            background-color: var(--accent-color);
+        }
+
+        .chart-bar-label {
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+
+        .chart-bar-value {
+            position: absolute;
+            top: -25px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-weight: bold;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .chart-bar:hover .chart-bar-value {
+            opacity: 1;
+        }
+
+        .chart-axis {
+            position: absolute;
+            left: 0;
+            bottom: 30px;
+            width: 100%;
+            height: 2px;
+            background-color: #ddd;
+        }
+
+        .table-container {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin: 2rem 0;
+        }
+
+        .table-header {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .table-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #f9f9f9;
+            font-weight: 600;
+        }
+
+        tbody tr {
+            transition: var(--transition);
+        }
+
+        tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .status-pending {
+            background-color: var(--warning-color);
+            color: white;
+        }
+
+        .status-inactive {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .pagination-item {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 5px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .pagination-item:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .pagination-item.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .testimonial-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .testimonial:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .testimonial::before {
+            content: '\"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 5rem;
+            color: #f0f0f0;
+            z-index: 0;
+            line-height: 1;
+        }
+
+        .testimonial-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-text {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .testimonial-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .testimonial-info p {
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .contact-form {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(98, 0, 234, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 3rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            color: var(--danger-color);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--card-bg);
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                padding: 1rem 0;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 0;
+                padding: 0.8rem 2rem;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .card-container, .testimonial-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .chart {
+                height: 300px;
+            }
+            
+            .table-container {
+                overflow-x: auto;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+            
+            .btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class=\"header-bg\">7</div>
+        <h1>Lucky Number 7</h1>
+        <p>Discover the magic and mystery behind the number seven</p>
+    </header>
+
+    <nav>
+        <div class=\"nav-container\">
+            <div class=\"logo\">
+                <div class=\"logo-number\">7</div>
+                <span>Lucky Seven</span>
+            </div>
+            <ul class=\"nav-links\" id=\"navLinks\">
+                <li><a href=\"#home\">Home</a></li>
+                <li><a href=\"#about\">About</a></li>
+                <li><a href=\"#statistics\">Statistics</a></li>
+                <li><a href=\"#facts\">Facts</a></li>
+                <li><a href=\"#testimonials\">Testimonials</a></li>
+                <li><a href=\"#contact\">Contact</a></li>
+            </ul>
+            <button class=\"hamburger\" id=\"hamburger\">☰</button>
+        </div>
+    </nav>
+
+    <main>
+        <section class=\"hero\" id=\"home\">
+            <h2>The Power of Seven</h2>
+            <p>Seven is often considered a lucky number in many cultures around the world. From the seven days of the week to the seven wonders of the world, this number has held significance throughout history.</p>
+            <div>
+                <a href=\"#about\" class=\"btn\">Learn More</a>
+                <button class=\"btn btn-secondary\" id=\"openModalBtn\">Quick Facts</button>
+            </div>
+        </section>
+
+        <div class=\"container\">
+            <section class=\"section\" id=\"about\">
+                <div class=\"section-title\">
+                    <h2>About Number 7</h2>
+                </div>
+                <div class=\"card-container\">
+                    <div class=\"card\">
+                        <div class=\"card-image\">7</div>
+                        <div class=\"card-content\">
+                            <h3 class=\"card-title\">Historical Significance</h3>
+                            <p class=\"card-text\">Throughout history, the number seven has been regarded as having special mathematical properties and religious significance.</p>
+                            <a href=\"#\" class=\"btn\">Read More</a>
+                        </div>
+                    </div>
+                    <div class=\"card\">
+                        <div class=\"card-image\">7</div>
+                        <div class=\"card-content\">
+                            <h3 class=\"card-title\">Mathematical Properties</h3>
+                            <p class=\"card-text\">Seven is a prime number, and it has unique mathematical characteristics that have fascinated mathematicians for centuries.</p>
+                            <a href=\"#\" class=\"btn\">Discover</a>
+                        </div>
+                    </div>
+                    <div class=\"card\">
+                        <div class=\"card-image\">7</div>
+                        <div class=\"card-content\">
+                            <h3 class=\"card-title\">Cultural Impact</h3>
+                            <p class=\"card-text\">From literature to movies, the number seven appears frequently in popular culture and has shaped our collective imagination.</p>
+                            <a href=\"#\" class=\"btn\">Explore</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class=\"section\" id=\"statistics\">
+                <div class=\"section-title\">
+                    <h2>Seven in Numbers</h2>
+                </div>
+                <div class=\"stats-container\">
+                    <div class=\"stat-card\">
+                        <div class=\"stat-number\">7</div>
+                        <div class=\"stat-title\">Days in a Week</div>
+                    </div>
+                    <div class=\"stat-card\">
+                        <div class=\"stat-number\">7</div>
+                        <div class=\"stat-title\">Wonders of the World</div>
+                    </div>
+                    <div class=\"stat-card\">
+                        <div class=\"stat-number\">7</div>
+                        <div class=\"stat-title\">Colors in a Rainbow</div>
+                    </div>
+                    <div class=\"stat-card\">
+                        <div class=\"stat-number\">7</div>
+                        <div class=\"stat-title\">Musical Notes</div>
+                    </div>
+                </div>
+
+                <div class=\"chart-container\">
+                    <div class=\"chart-header\">
+                        <h3 class=\"chart-title\">Popularity of Number 7 Over Time</h3>
+                        <div class=\"chart-controls\">
+                            <button class=\"btn btn-secondary\" id=\"updateChartBtn\">Update Data</button>
+                        </div>
+                    </div>
+                    <div class=\"chart\" id=\"popularityChart\">
+                        <div class=\"chart-bars\" id=\"chartBars\"></div>
+                        <div class=\"chart-axis\"></div>
+                    </div>
+                </div>
+
+                <div class=\"table-container\">
+                    <div class=\"table-header\">
+                        <h3 class=\"table-title\">Famous Sevens in History</h3>
+                        <div>
+                            <button class=\"btn btn-secondary\" id=\"refreshTableBtn\">Refresh</button>
+                        </div>
+                    </div>
+                    <div style=\"overflow-x: auto;\">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Year</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id=\"dataTable\">
+                                <tr>
+                                    <td>Seven Wonders of the Ancient World</td>
+                                    <td>Architecture</td>
+                                    <td>Ancient</td>
+                                    <td><span class=\"status status-inactive\">Historical</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Seven Deadly Sins</td>
+                                    <td>Religion</td>
+                                    <td>Medieval</td>
+                                    <td><span class=\"status status-active\">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Seven Samurai</td>
+                                    <td>Film</td>
+                                    <td>1954</td>
+                                    <td><span class=\"status status-active\">Classic</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Seven Years' War</td>
+                                    <td>History</td>
+                                    <td>1756-1763</td>
+                                    <td><span class=\"status status-inactive\">Historical</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Seven Hills of Rome</td>
+                                    <td>Geography</td>
+                                    <td>Ancient</td>
+                                    <td><span class=\"status status-active\">Existing</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class=\"pagination\" id=\"tablePagination\">
+                        <div class=\"pagination-item active\">1</div>
+                        <div class=\"pagination-item\">2</div>
+                        <div class=\"pagination-item\">3</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class=\"section\" id=\"facts\">
+                <div class=\"section-title\">
+                    <h2>Seven Interesting Facts</h2>
+                </div>
+                <div class=\"card-container\">
+                    <div class=\"card\">
+                        <div class=\"card-content\">
+                            <h3 class=\"card-title\">Psychological Limit</h3>
+                            <p class=\"card-text\">Humans can typically remember 7 (plus or minus 2) items in short-term memory, known as Miller's Law.</p>
+                        </div>
+                    </div>
+                    <div class=\"card\">
+                        <div class=\"card-content\">
+                            <h3 class=\"card-title\">Lucky Number</h3>
+                
